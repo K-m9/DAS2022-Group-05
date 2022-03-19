@@ -57,7 +57,7 @@ Following your analyses, you should then summarise your results in the form of a
 
 # Data processing
 Create a column to separate the rating: >7(1), <=7(0)
-
+```{r}
 library(janitor)
 ```
 
