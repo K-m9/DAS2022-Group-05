@@ -32,7 +32,6 @@ library(BMA)
 library(ROCR)
 library(GGally)
 library(generalhoslem)
-<<<<<<< HEAD
 ```
 
 ```{r}
