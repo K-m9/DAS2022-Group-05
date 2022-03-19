@@ -2,7 +2,6 @@
 title: "group project 2"
 author: "Group 05"
 date: "2022/3/15"
-<<<<<<< HEAD
 output:
   pdf_document:
     toc: yes
@@ -11,7 +10,6 @@ output:
   pdf_document:
     toc: yes
   
->>>>>>> XintongChen
   html_document:
     df_print: paged
     toc: yes
@@ -92,7 +90,7 @@ film <- read.csv("dataset5.csv")
 
 Create a column to separate the rating: \>7(1), \<=7(0)
 
->>>>>>> XintongChen
+
 ```{r}
 film <- film %>%
   mutate(rating.large7 = cut(rating, breaks = c(0,7,Inf), labels=c(0,1))) %>%
@@ -100,7 +98,7 @@ film <- film %>%
   na.omit()
 ```
 
-<<<<<<< HEAD
+
 
 # Exploratory data analysis
 ## The distribution of rating.large7 by genre
@@ -109,23 +107,23 @@ film <- film %>%
 
 ## The distribution of rating.large7 by genre
 
->>>>>>> XintongChen
+
 ```{r}
 film %>%
   group_by(genre, rating.large7)%>%
   summarise(n = n())
 ```
-<<<<<<< HEAD
+
 =======
 
->>>>>>> XintongChen
+
 ```{r}
 plot_xtab(film$rating.large7,film$genre,show.values =FALSE,show.total =FALSE,
 axis.labels =c("0","1"),
 axis.titles=c("rating larger than 7?"))
 ```
 
-<<<<<<< HEAD
+
 ## The distribution of rating.large7 by other numerical variables
 =======
 ```{r}
@@ -138,7 +136,7 @@ film %>%
 
 ## The distribution of rating.large7 by other numerical variables
 
->>>>>>> XintongChen
+
 ```{r}
 ## budget
 film.plot1<-ggplot(film, aes(y=budget,x=rating.large7))
@@ -173,7 +171,7 @@ plot.background =element_rect(fill ="transparent",colour =NA),
 panel.border =element_rect(fill =NA,colour ="black",size =1))
 ```
 
-<<<<<<< HEAD
+
 
 
 
@@ -184,13 +182,13 @@ panel.border =element_rect(fill =NA,colour ="black",size =1))
 
 ## Take log transformation of variable "vote" because the scale is not linear.
 
->>>>>>> XintongChen
+
 ```{r}
 film <- film %>%
   mutate(log.votes = log(votes))
 ```
 
-<<<<<<< HEAD
+
 ## Stepwise Slection: choosing which variables need to be removed. 
 Since Model with "year" removed has lowest AIC=1303.21 and deviance D=1283.2 we will go ahead and compared the three link function in our model
 =======
@@ -198,7 +196,7 @@ Since Model with "year" removed has lowest AIC=1303.21 and deviance D=1283.2 we 
 
 Since Model with "year" removed has lowest AIC=1303.21 and deviance D=1283.2 we will go ahead and compared the three link function in our model
 
->>>>>>> XintongChen
+
 ```{r}
 model_sat <-  glm(rating.large7 ~ length + budget + genre + log.votes + year, family = binomial(link = "logit"), data = film)
 
@@ -207,7 +205,7 @@ summary(logit.step)
 ```
 
 ## Comparing different link functions
-<<<<<<< HEAD
+
 The AIC and BIC in model1 is the smallest, and the Pseudo-R² is the largest. Hence we choose 'logit' link function to fit our model
 
 ### Model 1: logit link
@@ -217,12 +215,12 @@ The AIC and BIC in model1 is the smallest, and the Pseudo-R² is the largest. He
 
 ### Model 1: logit link
 
->>>>>>> XintongChen
+
 ```{r}
 model1 <- glm(rating.large7 ~ length + budget + log.votes + genre, family = binomial(link = "logit"), data = film)
 summary(model1)
 ```
-<<<<<<< HEAD
+
 ```{r,eval=FALSE}
 summ(model1)
 ```
@@ -236,12 +234,12 @@ s1 <- summ(model1)
 
 ### Model 2: probit link
 
->>>>>>> XintongChen
+
 ```{r}
 model2 <- glm(rating.large7 ~ length + budget + log.votes + genre, family = binomial(link = "probit"), data = film)
 summary(model2)
 ```
-<<<<<<< HEAD
+
 ```{r,eval=FALSE}
 summ(model2)
 ```
@@ -255,12 +253,12 @@ s2 <- summ(model2)
 
 ### Model 3: complementary log-log link
 
->>>>>>> XintongChen
+
 ```{r}
 model3 <- glm(rating.large7 ~ length + budget + log.votes + genre, family = binomial(link = "cloglog"), data = film)
 summary(model3)
 ```
-<<<<<<< HEAD
+
 ```{r, eval=FALSE}
 summ(model3)
 ```
@@ -321,7 +319,7 @@ $$I_{(genre=Short)} = \begin{cases}
 
 $$D_0-D_1 = `r round(s1$model$null.deviance, 2)`-`r round(s1$model$deviance, 2)` = `r round(s1$model$null.deviance-s1$model$deviance, 2)` >  {\chi}^2(0.95, 9) = `r qchisq(0.95,9)` $$
 
->>>>>>> XintongChen
+
 We reject H0, and we can say that the model1 fits the data better than Null model.
 
 ```{r}
@@ -329,7 +327,7 @@ model1$null.deviance - model1$deviance
 df = model1$df.null - model1$df.residual
 qchisq(p=0.95, df = df)
 ```
-<<<<<<< HEAD
+
 ## Deviance 
 To assess the adequacy of the model1 compared to the full/saturated model 
 
@@ -350,7 +348,7 @@ qchisq(p=0.95,df=(length(model_sat$coefficients)-length(model1$coefficients)))
 ```
 
 ## Odds ratios of model1
-<<<<<<< HEAD
+
 =======
 We interpret the odds ratios as follows: 
 for the increase in the film’s length, the odds of rating bigger than 7 decrease;
@@ -365,10 +363,10 @@ plot_model(model1,show.values=TRUE)+
 ```
 
 # Prediction
-<<<<<<< HEAD
+
 =======
 
->>>>>>> XintongChen
+
 ```{r}
 plot_model(model1,type="pred",terms=c("length"),axis.title=c("length","Prob(rating above 7)"))
 plot_model(model1,type="pred",terms=c("log.votes"),axis.title=c("log.votes","Prob(rating above 7)"))
@@ -377,10 +375,9 @@ plot_model(model1,type="pred",terms=c("genre"),axis.title=c("genre","Prob(rating
 ```
 
 # Model checking and diagnostics
-<<<<<<< HEAD
+
 =======
 
->>>>>>> XintongChen
 ## ROC curve and AUC
 ```{r}
 film$Prid <- predict(model1, film, type="response")
@@ -394,7 +391,6 @@ ggtitle(paste("Area under the curve:", round(auc@y.values[[1]], 3)))
 p4
 ```
 
-<<<<<<< HEAD
 The area under Curve (AUC) = 0.948 indicated that model 1 is very good at predicting the films rating greater than 7 given all predictor variables. 
 
 ## Hosmer-Lemeshow goodness of fit test
@@ -412,7 +408,6 @@ $H_1:$ Model1 is not a good fit for the data
 source(url("http://www.chrisbilder.com/categorical/Chapter5/AllGOFTests.R"))
 HLTest(model1,g=6)
 ```
-<<<<<<< HEAD
 =======
 
 >>>>>>> XintongChen
