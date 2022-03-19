@@ -5,7 +5,7 @@ date: "2022/3/15"
 output:
   pdf_document:
     toc: yes
-=======
+
 output: 
   pdf_document:
     toc: yes
@@ -58,7 +58,7 @@ Following your analyses, you should then summarise your results in the form of a
 
 # Data processing
 Create a column to separate the rating: >7(1), <=7(0)
-=======
+
 library(janitor)
 ```
 
@@ -102,7 +102,7 @@ film <- film %>%
 
 # Exploratory data analysis
 ## The distribution of rating.large7 by genre
-=======
+
 # Exploratory data analysis
 
 ## The distribution of rating.large7 by genre
@@ -114,7 +114,6 @@ film %>%
   summarise(n = n())
 ```
 
-=======
 
 
 ```{r}
@@ -125,7 +124,7 @@ axis.titles=c("rating larger than 7?"))
 
 
 ## The distribution of rating.large7 by other numerical variables
-=======
+
 ```{r}
 film %>% 
   tabyl(rating.large7, genre) %>% 
@@ -177,7 +176,7 @@ panel.border =element_rect(fill =NA,colour ="black",size =1))
 
 # Formal data analysis
 ## Take log transformation of variable "vote" because the scale is not linear.
-=======
+
 # Formal data analysis
 
 ## Take log transformation of variable "vote" because the scale is not linear.
@@ -191,7 +190,7 @@ film <- film %>%
 
 ## Stepwise Slection: choosing which variables need to be removed. 
 Since Model with "year" removed has lowest AIC=1303.21 and deviance D=1283.2 we will go ahead and compared the three link function in our model
-=======
+
 ## Stepwise Slection: choosing which variables need to be removed.
 
 Since Model with "year" removed has lowest AIC=1303.21 and deviance D=1283.2 we will go ahead and compared the three link function in our model
@@ -209,7 +208,7 @@ summary(logit.step)
 The AIC and BIC in model1 is the smallest, and the Pseudo-R² is the largest. Hence we choose 'logit' link function to fit our model
 
 ### Model 1: logit link
-=======
+
 
 The AIC and BIC in model1 is the smallest, and the Pseudo-R² is the largest. Hence we choose 'logit' link function to fit our model
 
@@ -226,7 +225,7 @@ summ(model1)
 ```
 
 ### Model 2: probit link
-=======
+
 
 ```{r, echo=FALSE}
 s1 <- summ(model1)
@@ -245,7 +244,7 @@ summ(model2)
 ```
 
 ### Model 3: complementary log-log link
-=======
+
 
 ```{r, echo=FALSE}
 s2 <- summ(model2)
@@ -272,7 +271,7 @@ summ(model3)
 
 ## Residual Deviance
 $$D_0-D_1 = 2982.5-1283.2 = 1699.3 >  {\chi}^2(0.95, 9) = 16.91898 $$ 
-=======
+
 
 ```{r, echo=FALSE}
 s3 <- summ(model3)
@@ -332,7 +331,7 @@ qchisq(p=0.95, df = df)
 To assess the adequacy of the model1 compared to the full/saturated model 
 
 The deviance of model1 is $D=1283.2> {\chi}^2(0.95,2)=5.991465$
-=======
+
 
 ## Deviance
 
@@ -349,7 +348,7 @@ qchisq(p=0.95,df=(length(model_sat$coefficients)-length(model1$coefficients)))
 
 ## Odds ratios of model1
 
-=======
+
 We interpret the odds ratios as follows: 
 for the increase in the film’s length, the odds of rating bigger than 7 decrease;
 for the increase in the film's budget, the odds of rating bigger than 7 increase;
@@ -364,7 +363,7 @@ plot_model(model1,show.values=TRUE)+
 
 # Prediction
 
-=======
+
 
 
 ```{r}
@@ -376,7 +375,7 @@ plot_model(model1,type="pred",terms=c("genre"),axis.title=c("genre","Prob(rating
 
 # Model checking and diagnostics
 
-=======
+
 
 ## ROC curve and AUC
 ```{r}
@@ -394,12 +393,12 @@ p4
 The area under Curve (AUC) = 0.948 indicated that model 1 is very good at predicting the films rating greater than 7 given all predictor variables. 
 
 ## Hosmer-Lemeshow goodness of fit test
-=======
+
 The area under Curve (AUC) = 0.948 indicated that model 1 is very good at predicting the films rating greater than 7 given all predictor variables.
 
 ## Hosmer-Lemeshow goodness of fit test
 
->>>>>>> XintongChen
+
 $H_0:$ Model1 fits the data well
 
 $H_1:$ Model1 is not a good fit for the data
@@ -408,7 +407,6 @@ $H_1:$ Model1 is not a good fit for the data
 source(url("http://www.chrisbilder.com/categorical/Chapter5/AllGOFTests.R"))
 HLTest(model1,g=6)
 ```
-=======
 
->>>>>>> XintongChen
+
 The large p-value = 0.2417 indicates no lack of fit for the model1 and we fail to reject $H_0$.
