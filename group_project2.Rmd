@@ -337,7 +337,7 @@ The deviance of model1 is $D=1283.2> {\chi}^2(0.95,2)=5.991465$
 To assess the adequacy of the model1 compared to the full/saturated model
 
 The deviance of model1 is $D=`r round(s1$model$deviance, 2)`> {\chi}^2(0.95,2)=`r qchisq(0.95,2)`$
->>>>>>> XintongChen
+
 
 So we can conclude that there is no evidence of lack of fit for the model1.
 
@@ -354,7 +354,7 @@ for the increase in the film's budget, the odds of rating bigger than 7 increase
 for the increase in the film's votes, the odds of rating bigger than 7 increase;
 Animation’s odds of survival were 0.71 times those of Action, Comedy’s odds of survival were 14.55 times those of Action, Documentary’s odds of survival were 135.39 times those of Action, Drama’s odds of survival were 0.12 times those of Action,
 Short’s odds of survival were 66.17 times those of Action.
->>>>>>> XintongChen
+
 ```{r}
 plot_model(model1,show.values=TRUE)+
   scale_y_log10(limits = c(0.001, 1000))
